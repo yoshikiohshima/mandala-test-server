@@ -76,8 +76,14 @@ function uploadImages() {
 
         let dataURL = canvas.toDataURL("image/jpeg");
 
-        return fetch('http://localhost:3000/upload', {
+        let baseUrl = window.location.protocol + '//' + window.location.hostname +
+            (window.location.port ? ':' + window.location.port : '');
+
+        let uploadUrl = baseUrl + '/upload/';
+
+        return fetch(uploadUrl, {
             method: 'POST',
+            mode: "cors",
             headers: {
                 'Content-Type': 'application/json'
             },

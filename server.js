@@ -1,10 +1,11 @@
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json({ limit: '50mb', extended: true })); // Adjust limit as needed
-
 app.use("/", express.static("public"));
 
 app.post('/upload', (req, res) => {
