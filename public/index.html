@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css" rel="stylesheet">
+    <script src="./client.js"></script>
+    <link href="./client.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="top-level-grid">
+      <input class="file-input" type="file" id="fileInput" accept="image/png, image/jpeg">
+      <div class="user-id-holder">
+	<div class="user-id-label">User ID:</div>
+	<div class="user-id" id="userId"></div>
+      </div>
+      <div class="image-holder" id="image-holder-1"></div>
+      <div class="image-holder" id="image-holder-2"></div>
+      <div class="image-holder" id="image-holder-3"></div>
+
+      <div class="image-holder" id="image-holder-4"></div>
+      <div class="image-holder" id="image-holder-5"></div>
+      <div class="image-holder" id="image-holder-6"></div>
+
+      <div class="image-holder" id="image-holder-7"></div>
+      <div class="image-holder" id="image-holder-8"></div>
+      <div class="image-holder" id="image-holder-9"></div>
+      <button class="uploadButton" id="uploadButton">Upload</button>
+    </div>
+    <script type="text/javascript">
+      setup();
+    </script>
+  </body>
+</html>
