@@ -2,7 +2,11 @@
 
 let fileInput;
 let uploadButton;
+let getUsersButton;
+let userNameField;
 let userId;
+
+let baseUrl;
 
 let user;
 
@@ -23,9 +27,23 @@ function setup() {
     uploadButton = document.getElementById('uploadButton');
     uploadButton.addEventListener("click", evt => uploadImages(evt));
 
+    getUsersButton = document.getElementById('getUsersButton');
+    getUsersButton.addEventListener("click", evt => getUsers(evt));
+
+    userNameField = document.getElementById('userNameField');
+    userNameField.addEventListener("keydown", evt => {
+        if (evt.key === "Enter") {
+            debugger;
+            getPictures(userNameField.value);
+        }
+    });
+
     userId = document.getElementById('userId');
     user = randomString();
     userId.innerHTML = user;
+
+    baseUrl = window.location.protocol + '//' + window.location.hostname +
+        (window.location.port ? ':' + window.location.port : '');
 }
 
 function fileSelected(evt) {
@@ -106,3 +124,25 @@ function uploadImages() {
     });
 }
 
+function getUsers() {
+    let url = baseUrl + '/users/';
+
+    fetch(url, {
+        method: 'GET',
+        mode: "cors",
+    })
+        .then((res) => res.json())
+        .then((json) => console.log(json))
+        .catch((error) => {console.error('Error:', error); return null;});
+}
+
+function getPictures(userId) {
+    let url = baseUrl + `/pictures/${userId}`;
+    fetch(url, {
+        method: 'GET',
+        mode: "cors",
+    })
+        .then((res) => res.json())
+        .then((json) => console.log(json))
+        .catch((error) => {console.error('Error:', error); return null;});
+}

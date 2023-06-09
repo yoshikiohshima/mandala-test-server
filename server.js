@@ -55,4 +55,34 @@ app.post('/upload', (req, res) => {
     return res.status(200).send({ message: 'Image uploaded successfully' });
 });
 
+app.get('/users', (req, res) => {
+    let userPath = `./public/uploads/`;
+    fs.readdir(userPath, (err, files) => {
+        if (err) {
+            console.error('Failed to list files', err);
+            res.status(500).json({error: 'Failed to list files'});
+        } else {
+            res.json(files);
+        }
+    });
+});
+
+app.get('/pictures/:userId', (req, res) => {
+    const userId = req.params.userId;
+    console.log(userId);
+    
+    if (!userId) {
+        return res.status(400).send({message: "Bad Request: missing userId."});
+    }
+    let userPath = `./public/uploads/${userId}`;
+    fs.readdir(userPath, (err, files) => {
+        if (err) {
+            console.error('Failed to list files', err);
+            res.status(500).json({error: 'Failed to list files'});
+        } else {
+            res.json(files);
+        }
+    });
+});
+
 app.listen(3000, () => console.log('Server started on port 3000'));
