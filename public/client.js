@@ -33,7 +33,6 @@ function setup() {
     userNameField = document.getElementById('userNameField');
     userNameField.addEventListener("keydown", evt => {
         if (evt.key === "Enter") {
-            debugger;
             getPictures(userNameField.value);
         }
     });
@@ -143,6 +142,9 @@ function getPictures(userId) {
         mode: "cors",
     })
         .then((res) => res.json())
-        .then((json) => console.log(json))
+        .then((json) => {
+            console.log(json);
+            console.log(json.map((n) => `${baseUrl}/uploads/${userId}/${n}`));
+        })
         .catch((error) => {console.error('Error:', error); return null;});
 }

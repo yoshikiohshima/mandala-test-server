@@ -69,7 +69,6 @@ app.get('/users', (req, res) => {
 
 app.get('/pictures/:userId', (req, res) => {
     const userId = req.params.userId;
-    console.log(userId);
     
     if (!userId) {
         return res.status(400).send({message: "Bad Request: missing userId."});
