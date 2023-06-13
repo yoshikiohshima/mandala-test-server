@@ -9,9 +9,9 @@ const https = require('https');
 let credentials;
 try {
 
-    let privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
-    let certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
-    let credentials = {privateKey, certificate};
+    let privateKey  = fs.readFileSync('./privkey.pem', 'utf8');
+    let certificate = fs.readFileSync('./cert.pem', 'utf8');
+    credentials = {key: privateKey, cert: certificate};
 }catch (e) {
     console.log(e);
 };
@@ -105,6 +105,6 @@ httpServer.listen(3000, () => console.log('Server started on port 3000'));
 if (credentials) {
     console.log("also running https");
     let httpsServer = https.createServer(credentials, app);
-    httpsServer.listen(3000, () => console.log('Server started on port 3000'));
+    httpsServer.listen(3443, () => console.log('Server started on port 3443'));
 }
 
