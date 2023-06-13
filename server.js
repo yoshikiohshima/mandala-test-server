@@ -3,6 +3,19 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const http = require('http');
+const https = require('https');
+
+let credentials;
+try {
+
+    let privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+    let certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+    let credentials = {privateKey, certificate};
+}catch (e) {
+    console.log(e);
+};
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb', extended: true })); // Adjust limit as needed
@@ -46,7 +59,7 @@ app.post('/upload', (req, res) => {
         fs.mkdirSync(userPath, {recursive: true});
     }
 
-    console.log("write", dataName, base64Image.length);
+    console.log("write", userId, `${dataName}${ext}`, base64Image.length);
     // Write file
     let file = fs.createWriteStream(`${userPath}/${dataName}${ext}`);
     file.write(response.data);
@@ -69,6 +82,8 @@ app.get('/users', (req, res) => {
 
 app.get('/pictures/:userId', (req, res) => {
     const userId = req.params.userId;
+
+    console.log("pictures for: ", userId);
     
     if (!userId) {
         return res.status(400).send({message: "Bad Request: missing userId."});
@@ -84,4 +99,12 @@ app.get('/pictures/:userId', (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log('Server started on port 3000'));
+let httpServer = http.createServer(app);
+httpServer.listen(3000, () => console.log('Server started on port 3000'));
+
+if (credentials) {
+    console.log("also running https");
+    let httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(3000, () => console.log('Server started on port 3000'));
+}
+

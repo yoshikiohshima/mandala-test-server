@@ -8,7 +8,10 @@
   </head>
   <body>
     <div class="top-level-grid">
-      <input class="file-input" type="file" id="fileInput" accept="image/png, image/jpeg">
+      <div class="chooseField" id="chooseField">
+	<button class="chooseButton" id="chooseButton">Choose Files</button>
+	<input class="file-input" type="file" id="fileInput" accept="image/png, image/jpeg" multiple/>
+      </div>
       <div class="user-id-holder">
 	<div class="user-id-label">User ID:</div>
 	<div class="user-id" id="userId"></div>
