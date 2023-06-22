@@ -1,0 +1,141 @@
+html, body {
+    height: 100%;
+}
+
+body {
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#title {
+  text-align: center;
+  font-size: 2.5em;
+  color: #4f4f4f;
+  padding: 20px 0;
+}
+
+#button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#choose-button,
+#upload-button {
+  font-size: 1.5em;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+
+#upload-button[disabled] {
+  background-color: #b2b2b2;
+  color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+#user-id {
+  font-size: 1.5em;
+  padding: 10px;
+  border: none;
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  width: 150px; /* or adjust as needed */
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  grid-template-rows: repeat(3, 30%);
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.file-input {
+    width: 0px;
+    height: 0px;
+    display: none;
+}
+
+.image-holder {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.my-image {
+    max-width: 100%;
+    max-height: calc(100% - 30px);
+}
+
+.accepted-image {
+    max-height: 100%;
+}
+
+.preview-image {
+  width: 100%;
+  display: block;
+}
+
+.approve-button,
+.delete-button {
+  position: absolute;
+  top: 5px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+}
+
+.approve-button {
+  background-color: #27ae60;
+  left: 5px;
+}
+
+.delete-button {
+  background-color: #c0392b;
+  right: 5px;
+}
+
+.cover {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 30px;
+    width: 100%;
+    height: calc(100% - 30px);
+    color: blue;
+}
+
+.zoomed {
+    position: absolute;
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+}
+
+.button-hidden {
+    display: none;
+}
+
+.uncropped {
+    border: #c0392b dotted 4px;
+}
+    
